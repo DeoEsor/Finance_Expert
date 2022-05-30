@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+        <ApplicationIcon>Resources\Icons\default_logo.ico</ApplicationIcon>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AlphaVantage.Net.Core" Version="2.0.2" />
+        <PackageReference Include="AlphaVantage.Net.Stocks" Version="2.0.2" />
+        <PackageReference Include="DotNetProjects.WpfToolkit.DataVisualization" Version="6.1.94" />
+        <PackageReference Include="DryIoc" Version="5.1.0" />
+        <PackageReference Include="InteractiveDataDisplay.WPF" Version="1.0.0" />
+        <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
+        <PackageReference Include="MaterialDesignColors" Version="2.0.6" />
+        <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\AlphaVantageAPI\AlphaVantageAPI.csproj" />
+      <ProjectReference Include="..\Expert.Core\Expert.Core.csproj" />
+      <ProjectReference Include="..\Expert.Finance\Expert.Finance.csproj" />
+      <ProjectReference Include="..\Expert.gRPC.Client\Expert.gRPC.Client.csproj" />
+      <ProjectReference Include="..\Users.gRPC.Client\Users.gRPC.Client.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\Icons\close.png" />
+      <Content Include="Resources\Icons\close.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Resources\Icons\default_logo.ico" />
+      <Content Include="Resources\Icons\default_logo.ico">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Resources\Icons\default_logo.png" />
+      <Content Include="Resources\Icons\default_logo.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Resources\Icons\download.png" />
+      <Content Include="Resources\Icons\download.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Resources\Icons\file.png" />
+      <Content Include="Resources\Icons\file.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Resources\Icons\plus.png" />
+      <Content Include="Resources\Icons\plus.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Resources\Icons\send.png" />
+      <Content Include="Resources\Icons\send.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Resources\Icons\send_file.png" />
+      <Content Include="Resources\Icons\send_file.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Resources\Icons\user_add.png" />
+      <Content Include="Resources\Icons\user_add.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="UserControls\PortfeilControl.xaml.cs~" />
+    </ItemGroup>
+
+</Project>

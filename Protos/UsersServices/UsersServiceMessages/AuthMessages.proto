@@ -1,0 +1,10 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "UserService.Messages";
+
+package UserService;
+
+message AuthRequest{
+  string Username = 1;
+  string Password = 2;
+}

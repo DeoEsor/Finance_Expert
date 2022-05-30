@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="Expert.DesktopApp.UserControls.PortfolioControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Expert.DesktopApp.UserControls"
+             xmlns:wpf="clr-namespace:InteractiveDataDisplay.WPF;assembly=InteractiveDataDisplay.WPF"
+             xmlns:convertors="clr-namespace:Expert.DesktopApp.MVVM.Convertors"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="500"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <UserControl.Resources>
+        <convertors:PortfoliosConvertor x:Key="PortfoliosConvertor" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ComboBox
+            x:Name="SymbolsBox"
+            ItemsSource="{Binding Symbols}"
+            SelectionChanged="Selector_OnSelectionChanged"
+            SelectedIndex="0"
+            Margin="20,0,0,10"
+            FontSize="20"
+            Height="40"
+            Width="100"
+            Foreground="White"
+            />
+        <wpf:Chart Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Background="Transparent">
+            <wpf:LineGraph x:Name="linegraph" Description="{Binding ElementName=SymbolsBox, Path=SelectedItem}" Stroke="Blue" StrokeThickness="3"/>
+        </wpf:Chart> 
+        <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
+            <TextBlock Text="Показатели портфеля" Foreground="White" FontSize="20"/>
+            <Border
+                BorderBrush="Black" BorderThickness="1, 1,0,1"
+                CornerRadius="10"
+                Margin="7">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock 
+                    Text="Риск"
+                    Foreground="White"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" 
+                           Text="{Binding CurrentPortfolio.Risk, TargetNullValue=0 , UpdateSourceTrigger=PropertyChanged}"
+                           Foreground="Red"
+                           FontStyle="Italic"/>
+                <TextBlock Grid.Row="1"
+                           Text="Возможный доход"
+                           TextWrapping="Wrap"
+                           Foreground="White"/>
+                <TextBlock Grid.Row="1" Grid.Column="1"
+                           Text="{Binding CurrentPortfolio.PossibleIncome, TargetNullValue=0 , UpdateSourceTrigger=PropertyChanged}"
+                           Foreground="Green"/>
+                <TextBlock Grid.Row="2" 
+                           Text="Бета фактор"
+                           TextWrapping="Wrap"
+                           Foreground="White"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" 
+                           Text="{Binding CurrentPortfolio.BetaFactor, TargetNullValue=0 , UpdateSourceTrigger=PropertyChanged}"
+                           Foreground="Yellow"/>
+                <!--<TextBlock Grid.Row="3" 
+                           Text="Конец рассчета периода"
+                           TextWrapping="Wrap"
+                           Foreground="White"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding CurrentPortfolio.ValidityEndDate}" Foreground="White"/>-->
+                
+            </Grid>
+        </Border>
+        </StackPanel>
+        
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="0"
+                  Style="{StaticResource MaterialDesignDataGrid}"
+                  ItemsSource="{Binding  Portfolios,
+                  Converter={StaticResource PortfoliosConvertor}}"
+                  
+                  >
+        </DataGrid>
+    </Grid>
+</UserControl>

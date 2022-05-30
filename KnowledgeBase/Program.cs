@@ -11,7 +11,7 @@ public class Program
         
         var avConnection = new AVConnection(api);
             
-        db.Stocks.AddRange(avConnection.GetDailyPrices("IBM"));
+        db.Stocks.AddRange(avConnection.GetMonthlyStocksDates("IBM"));
         db.SaveChanges(); 
     }
 }

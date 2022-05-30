@@ -1,0 +1,139 @@
+﻿<Window x:Class="Expert.DesktopApp.Registration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:viewModel="clr-namespace:Expert.DesktopApp.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="450" Width="380"
+        AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" ResizeMode="NoResize"
+        MouseDown="Registration_OnMouseDown">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+ 
+ 
+            <Border CornerRadius="10" Grid.RowSpan="2">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#252525" Offset="0.0"/>
+                        <GradientStop Color="#292B2A" Offset="0.5"/>
+                        <GradientStop Color="#252525" Offset="0.8"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+ 
+ 
+            <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                
+                <iconPacks:PackIconMaterial 
+                    Kind="Finance" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center" 
+                    Foreground="White"
+                    Height="50"
+                    Width="50"/>
+                
+                <TextBlock Text="Finance Expert"
+                           FontWeight="Light"
+                           FontFamily="helvetica"
+                           FontSize="22"
+                           Foreground="White"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+ 
+ 
+ 
+            <StackPanel Grid.Row="1" >
+                <Grid Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Пользователь"/>
+                    <Button Grid.Column="1" Content="Эксперт"/>
+                </Grid>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox FontFamily="Helvetica"
+                             FontWeight="Light"
+                             Text="{Binding UserName}"
+                             FontSize="20"
+                             HorizontalAlignment="Center"
+                             Foreground="White"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Width="235"
+                             HorizontalContentAlignment="Left"
+                             Height="25"
+                             Margin="63,0,0,0"/>
+                    <iconPacks:PackIconMaterial Kind="Account" 
+                                                VerticalAlignment="Center" 
+                                                HorizontalAlignment="Center" 
+                                                Foreground="White"/>
+                </StackPanel>
+                <Border Width="250"
+                        Height="2"
+                        Background="White"
+                        Opacity="0.5"/>
+ 
+ 
+ 
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                    <PasswordBox
+                        x:Name="PasswordBox"
+                            FontFamily="Helvetica"
+                             FontWeight="Light"
+                             Password="Password"
+                             FontSize="20"
+                             HorizontalAlignment="Center"
+                             Foreground="White"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Width="235"
+                             HorizontalContentAlignment="Left"
+                             Height="25"
+                             Margin="63,0,0,0"/>
+                    <iconPacks:PackIconMaterial Kind="FormTextboxPassword" 
+                                                VerticalAlignment="Center" 
+                                                HorizontalAlignment="Center" 
+                                                Foreground="White"/>
+                </StackPanel>
+                <Border Width="250"
+                        Height="2"
+                        Background="White"
+                        Opacity="0.5"/>
+ 
+ 
+                <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
+                    <Button
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding ElementName=PasswordBox}"
+                        Style="{StaticResource RoundCorner}"
+                        Width="100" Height="40" 
+                        Content="Авторизация" Margin="60,0,60,0"
+                        Foreground="White"/>
+                    <Button 
+                        Command="{Binding RegisterCommand}"
+                        CommandParameter="{Binding ElementName=PasswordBox}"
+                        Style="{StaticResource RoundCorner}" 
+                        Width="100" Height="40"
+                        Content="Регистрация"
+                        Foreground="White"/>
+                </StackPanel>
+ 
+            </StackPanel>
+ 
+ 
+            
+ 
+            
+ 
+        </Grid>
+    </Grid>
+</Window>

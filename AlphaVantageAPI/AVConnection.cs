@@ -10,7 +10,20 @@ public class AVConnection
     
     public AVConnection(string apiKey) => _apiKey = apiKey;
 
-    public IEnumerable<StockData> GetDailyPrices(string symbol)
+    public IEnumerable<StockData> GetDailyStocks(string symbol)
+    {
+        var query = AVQuery.CreateAvQuery(_apiKey, "TIME_SERIES_DAILY", symbol);
+        
+        var prices = query
+            .ToString()
+            .GetStringFromUrl()
+            .FromCsv<List<StockData>>();
+        
+        prices.ForEach(s => s.Symbol = symbol);
+        return prices;
+    }
+    
+    public IEnumerable<StockData> GetMonthlyStocksDates(string symbol)
     {
         var query = AVQuery.CreateAvQuery(_apiKey, "TIME_SERIES_DAILY", symbol);
         

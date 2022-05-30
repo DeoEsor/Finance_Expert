@@ -1,0 +1,92 @@
+﻿<Window
+    AllowsTransparency="True"
+    Height="450"
+    MinHeight="450"
+    MinWidth="600"
+    ResizeMode="CanResizeWithGrip"
+    Background="Transparent"
+    Width="800"
+    WindowStyle="None"
+    mc:Ignorable="d"
+    x:Class="Expert.DesktopApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Expert.DesktopApp.MVVM.ViewModel"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:userControls="clr-namespace:Expert.DesktopApp.UserControls">
+    <!--<Window.DataContext>
+        <vm:ChatViewModel />
+    </Window.DataContext> -->
+    <Window.Resources>
+        <BitmapImage x:Key="DefaultImage" UriSource="/resources/Icons/default_logo.png" />
+        <Image x:Key="SendButtonImage" Source="../../Resources/Icons/send.png"  Width="20" Height="20"
+               RenderOptions.BitmapScalingMode="Fant"/>
+        <Image x:Key="SendFileButtonImage" Source="../../Resources/Icons/plus.png" Width="20" Height="20"
+               RenderOptions.BitmapScalingMode="Fant"/>
+        <Image x:Key="AddUserImage" Source="../../Resources/Icons/user_add.png" Width="20" Height="20"
+               RenderOptions.BitmapScalingMode="Fant"/>
+    </Window.Resources>
+    <Border Background="#272537" CornerRadius="20" MouseDown="Border_MouseDown">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <StackPanel  Orientation="Horizontal">
+                <TextBlock Text="Finance Expert"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Foreground="WhiteSmoke"
+                           FontSize="22"
+                           Margin="20,0,0,0"
+                           />
+                <iconPacks:PackIconMaterial Kind="Finance" 
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Right" 
+                                            Foreground="White"/>
+            </StackPanel>
+            
+            <StackPanel Margin="0,20,20,0" Grid.Row="1" Grid.Column="0">
+                <RadioButton Content="Главная"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Новости"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Составить портфель"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+            </StackPanel>
+            
+            <TextBox
+                Grid.Row="0" Grid.Column="1"
+                Width="250"
+                Height="40"
+                VerticalContentAlignment="Center"
+                HorizontalAlignment="Left"
+                Margin="5"
+                Style="{StaticResource ModernTextBox}"
+                />
+            
+            <ContentControl Grid.Row="1" Grid.Column="1"
+                            Margin="10"
+                            VerticalAlignment="Center">
+                <userControls:PortfolioControl />
+            </ContentControl>
+        </Grid>
+    </Border>
+</Window>
+

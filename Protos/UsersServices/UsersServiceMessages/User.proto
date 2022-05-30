@@ -1,0 +1,24 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "UserService.Messages";
+
+package UserService;
+
+message User {
+  int32 id = 1;
+  string username = 2;
+  string password = 3;
+  optional UserStatus status = 4;
+}
+
+message UserReply {
+  int32 status_code = 1;
+  optional User User = 2; 
+}
+
+
+enum UserStatus
+{
+  Consumer = 0;
+  Expert = 1;
+}
