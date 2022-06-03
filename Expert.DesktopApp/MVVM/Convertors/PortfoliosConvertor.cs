@@ -16,8 +16,9 @@ public class PortfoliosConvertor : IValueConverter
         public object Convert(object values, Type targetType, object parameter, CultureInfo culture)
         {
                 if (!(values is ObservableCollection<Portfolio> portfolios)) return null;
-                List<(StockData, int)> a = portfolios.SelectMany(s => s.StocksList).ToList();
-                return a.SelectMany<(StockData, int),StockData>(s => new []{s.Item1}).ToList();
+                //List<(StockData, int)> a = portfolios.SelectMany(s => s.StocksList).ToList();
+                //return a.SelectMany<(StockData, int),StockData>(s => new []{s.Item1}).ToList();
+                return null!; // TODO mb
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

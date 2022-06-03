@@ -22,32 +22,34 @@ public sealed class UserAuthorizationService
         httpHandler.ServerCertificateCustomValidationCallback =
             HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 		
-        Channel  = GrpcChannel.ForAddress("https://localhost:7173", 
+        Channel  = GrpcChannel.ForAddress("https://localhost:7280", 
                                             new GrpcChannelOptions { HttpHandler = httpHandler });
 
         Client = new UserServiceClient(Channel);
     }
     
-    public  UserReply Auth(string Username, string Password, CancellationToken cancellationToken = default)
+    public  UserReply Auth(string Username, string Password, UserStatus status, CancellationToken cancellationToken = default)
     {
         Metadata headers = null!;
         DateTime? deadline = null!;
         var request = new AuthRequest
         {
             Username = Username,
-            Password = Password
+            Password = Password,
+            Status = status
         };
         return Client.Auth(request, headers, deadline, cancellationToken);
     }
 
-    public UserReply Register(string Username, string Password, CancellationToken cancellationToken = default)
+    public UserReply Register(string Username, string Password, UserStatus status, CancellationToken cancellationToken = default)
     {
         Metadata headers = null!;
         DateTime? deadline = null!;
         var request = new RegisterRequest()
         {
             Username = Username,
-            Password = Password
+            Password = Password,
+            Status = status
         };
         return Client.Register(request, headers, deadline, cancellationToken);
     }

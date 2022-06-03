@@ -8,7 +8,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Expert.Finance\Expert.Finance.csproj" />
+        <PackageReference Include="Google.Protobuf" Version="3.21.1" />
+        <PackageReference Include="Grpc.AspNetCore.Server" Version="2.46.0" />
+        <PackageReference Include="Grpc.Tools" Version="2.46.3">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <ProjectReference Include="..\Expert.Finance\Expert.Finance.csproj" />
+        <ProjectReference Include="..\KnowledgeBase\KnowledgeBase.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <Protobuf Include="../Protos/ExpertServices/**/*.proto" GrpcService="Server" ProtoRoot="../Protos/ExpertServices" />
+    </ItemGroup>
 </Project>

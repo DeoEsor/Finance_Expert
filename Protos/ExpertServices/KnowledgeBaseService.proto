@@ -1,4 +1,20 @@
 ﻿syntax = "proto3";
+import "google/protobuf/empty.proto";
+import "KnowledgeBaseServiceMessages/Knowledge.proto";
 
-package UserService;
-option csharp_namespace = "UserService";
+package ExpertService;
+option csharp_namespace = "ExpertService";
+
+service KnowledgeBase{
+  rpc GetPortfoliosOfUser (UserId) returns (Portfolios);
+  rpc GetPortfoliosOfExpert (UserId) returns (Portfolios);
+  rpc CreatePortfolioByStocks (Stocks) returns (Portfolios);
+}
+
+message UserId{
+  int32 id = 1;
+}
+
+message Stocks{
+  repeated Stock stocks = 1; 
+}

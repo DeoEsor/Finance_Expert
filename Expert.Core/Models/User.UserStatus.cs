@@ -4,7 +4,7 @@ public partial class User
 {
     public enum UserStatus
     {
-        Consumer,
-        Expert
+        Consumer = 0,
+        Expert = 1
     }
 }

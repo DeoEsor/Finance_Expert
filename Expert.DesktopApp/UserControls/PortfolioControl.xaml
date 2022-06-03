@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Expert.DesktopApp.UserControls"
              xmlns:wpf="clr-namespace:InteractiveDataDisplay.WPF;assembly=InteractiveDataDisplay.WPF"
              xmlns:convertors="clr-namespace:Expert.DesktopApp.MVVM.Convertors"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="500"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
@@ -28,17 +29,41 @@
             ItemsSource="{Binding Symbols}"
             SelectionChanged="Selector_OnSelectionChanged"
             SelectedIndex="0"
+            Style="{StaticResource MaterialDesignComboBox}"
             Margin="20,0,0,10"
             FontSize="20"
             Height="40"
             Width="100"
-            Foreground="White"
+            Foreground="Green"
             />
         <wpf:Chart Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Background="Transparent">
-            <wpf:LineGraph x:Name="linegraph" Description="{Binding ElementName=SymbolsBox, Path=SelectedItem}" Stroke="Blue" StrokeThickness="3"/>
+            <wpf:LineGraph x:Name="Linegraph" 
+                           Description="{Binding ElementName=SymbolsBox, Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}" 
+                           Stroke="Green" StrokeThickness="2"
+                           IsAutoFitEnabled="True"
+                           IsManipulationEnabled="False"/>
         </wpf:Chart> 
         <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
-            <TextBlock Text="Показатели портфеля" Foreground="White" FontSize="20"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Command="{Binding LeftCommand}">
+                    <Button.Content>
+                        <iconPacks:PackIconMaterial Kind= "ArrowLeft"
+                                                    VerticalAlignment="Center" 
+                                                    HorizontalAlignment="Center" 
+                                                    Foreground="White"/>
+                    </Button.Content>
+                </Button>
+                <TextBlock Text="Показатели портфеля" Foreground="White" FontSize="20" Margin="10"/>
+                <TextBlock Text="{Binding CurrentPortfolio.Name}" Foreground="White" FontSize="20" Margin="10"/>
+                <Button Command="{Binding RightCommand}">
+                    <Button.Content>
+                        <iconPacks:PackIconMaterial Kind= "ArrowRight"
+                                                    VerticalAlignment="Center" 
+                                                    HorizontalAlignment="Center" 
+                                                    Foreground="White"/>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
             <Border
                 BorderBrush="Black" BorderThickness="1, 1,0,1"
                 CornerRadius="10"
@@ -57,17 +82,30 @@
                 <TextBlock 
                     Text="Риск"
                     Foreground="White"/>
-                <TextBlock Grid.Row="0" Grid.Column="1" 
+                <StackPanel Grid.Row="0" Grid.Column="1"  Orientation="Horizontal">
+                    <TextBlock  
                            Text="{Binding CurrentPortfolio.Risk, TargetNullValue=0 , UpdateSourceTrigger=PropertyChanged}"
                            Foreground="Red"
+                           FontSize="24"
                            FontStyle="Italic"/>
-                <TextBlock Grid.Row="1"
+                    <TextBlock Text="%" FontSize="24"/>
+                
+                </StackPanel>
+                
+                <TextBlock Grid.Row="1" Grid.Column="0" 
                            Text="Возможный доход"
                            TextWrapping="Wrap"
                            Foreground="White"/>
-                <TextBlock Grid.Row="1" Grid.Column="1"
-                           Text="{Binding CurrentPortfolio.PossibleIncome, TargetNullValue=0 , UpdateSourceTrigger=PropertyChanged}"
-                           Foreground="Green"/>
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock 
+                               Text="{Binding CurrentPortfolio.PossibleIncome, TargetNullValue=0 , UpdateSourceTrigger=PropertyChanged}"
+                               FontSize="24"
+                               Foreground="Green"/>    
+                    <TextBlock Text="%" FontSize="24"/>
+                </StackPanel>
+                
+                
+                <!--
                 <TextBlock Grid.Row="2" 
                            Text="Бета фактор"
                            TextWrapping="Wrap"
@@ -75,22 +113,91 @@
                 <TextBlock Grid.Row="2" Grid.Column="1" 
                            Text="{Binding CurrentPortfolio.BetaFactor, TargetNullValue=0 , UpdateSourceTrigger=PropertyChanged}"
                            Foreground="Yellow"/>
-                <!--<TextBlock Grid.Row="3" 
+                -->
+                <!--
+                <TextBlock Grid.Row="3" 
                            Text="Конец рассчета периода"
                            TextWrapping="Wrap"
                            Foreground="White"/>
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding CurrentPortfolio.ValidityEndDate}" Foreground="White"/>-->
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding CurrentPortfolio.ValidityEndDate}" Foreground="White"/>
+                -->
                 
             </Grid>
         </Border>
         </StackPanel>
         
         <DataGrid Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="0"
+                  Background="Transparent"
+                  Foreground="White"
                   Style="{StaticResource MaterialDesignDataGrid}"
-                  ItemsSource="{Binding  Portfolios,
-                  Converter={StaticResource PortfoliosConvertor}}"
-                  
+                  ItemsSource="{Binding  CurrentPortfolio.StocksList}"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  IsReadOnly="True"
+                  Margin="30"
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch"
+                  VerticalContentAlignment="Stretch"
+                  HorizontalContentAlignment="Stretch"
                   >
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="Transparent"></Setter>
+                    <Setter Property="LayoutTransform">
+                        <Setter.Value>
+                            <TransformGroup>
+                                <RotateTransform Angle="45"/>
+                            </TransformGroup>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="Transparent" />
+                        </Trigger>
+                        <Trigger Property="IsSelected"
+                                 Value="False">
+                            <Setter Property="Background"
+                                    Value="Transparent" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="Transparent" />
+                        </Trigger>
+                        <Trigger Property="IsSelected"
+                                 Value="False">
+                            <Setter Property="Background"
+                                    Value="Transparent" />
+                        </Trigger>
+                    </Style.Triggers>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="IsManipulationEnabled" Value="False"/>
+                    <Setter Property="LayoutTransform">
+                        <Setter.Value>
+                            <TransformGroup>
+                                <RotateTransform Angle="45"/>
+                            </TransformGroup>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.LayoutTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="-90"/>
+                </TransformGroup>
+            </DataGrid.LayoutTransform>
         </DataGrid>
     </Grid>
 </UserControl>

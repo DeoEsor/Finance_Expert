@@ -14,6 +14,11 @@
     <ItemGroup>
       <ProjectReference Include="..\Expert.Core\Expert.Core.csproj" />
       <ProjectReference Include="..\ExpertFramework\ExpertFramework.csproj" />
+      <ProjectReference Include="..\MathOptimization\MathOptimization.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore.Mvc.Core" />
     </ItemGroup>
 
 </Project>

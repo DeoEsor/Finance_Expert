@@ -56,8 +56,8 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Content="Пользователь"/>
-                    <Button Grid.Column="1" Content="Эксперт"/>
+                    <Button Content="Пользователь" Command="{Binding ChangeToConsumerCommand}"/>
+                    <Button Grid.Column="1" Content="Эксперт" Command="{Binding ChangeToExpertCommand}"/>
                 </Grid>
                 <StackPanel Orientation="Horizontal">
                     <TextBox FontFamily="Helvetica"
@@ -126,14 +126,7 @@
                         Content="Регистрация"
                         Foreground="White"/>
                 </StackPanel>
- 
             </StackPanel>
- 
- 
-            
- 
-            
- 
         </Grid>
     </Grid>
 </Window>

@@ -7,6 +7,7 @@ namespace AlphaVantageAPI;
 public class AVConnection
 {
     private readonly string _apiKey;
+    public const string  Apikey = "SXNME3YSQZTFJK7I";
     
     public AVConnection(string apiKey) => _apiKey = apiKey;
 
@@ -23,7 +24,7 @@ public class AVConnection
         return prices;
     }
     
-    public IEnumerable<StockData> GetMonthlyStocksDates(string symbol)
+    public IEnumerable<StockData> GetDailyStocksDates(string symbol)
     {
         var query = AVQuery.CreateAvQuery(_apiKey, "TIME_SERIES_DAILY", symbol);
         
@@ -35,4 +36,19 @@ public class AVConnection
         prices.ForEach(s => s.Symbol = symbol);
         return prices;
     }
+    
+    public IEnumerable<StockData> GetWeeklyStocksDates(string symbol)
+    {
+        var query = AVQuery.CreateAvQuery(_apiKey, "TIME_SERIES_WEEKLY", symbol);
+        
+        var prices = query
+            .ToString()
+            .GetStringFromUrl()
+            .FromCsv<List<StockData>>();
+        
+        prices.ForEach(s => s.Symbol = symbol);
+        return prices;
+    }
+    
+    
 }

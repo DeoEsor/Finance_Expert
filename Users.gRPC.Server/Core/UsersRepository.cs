@@ -10,8 +10,6 @@ public class UsersRepository : IRepository<User>, IDisposable, IAsyncDisposable
 
     public void AddData(User data)
     {
-        if (UsersDb.Users.Any(u => u.Id == data.Id))
-            throw new ArgumentException(nameof(data.Id));
         UsersDb.Users.Add(data);
         UsersDb.SaveChanges();
     }

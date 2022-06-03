@@ -1,5 +1,7 @@
 ﻿syntax = "proto3";
 
+import "UsersServiceMessages/User.proto";
+
 option csharp_namespace = "UserService.Messages";
 
 package UserService;
@@ -7,4 +9,5 @@ package UserService;
 message AuthRequest{
   string Username = 1;
   string Password = 2;
+  optional UserStatus status = 3;
 }

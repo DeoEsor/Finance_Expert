@@ -17,6 +17,13 @@
     
     <ItemGroup>
         <Protobuf Include="../Protos/ExpertServices/**/*.proto" GrpcService="Client" ProtoRoot="../Protos/ExpertServices" />
+        <Protobuf Update="..\Protos\ExpertServices\PortfolioOptimize.proto">
+          <Link>ExpertServices\PortfolioOptimize.proto</Link>
+        </Protobuf>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\AlphaVantageAPI\AlphaVantageAPI.csproj" />
     </ItemGroup>
 
 </Project>

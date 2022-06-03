@@ -5,13 +5,14 @@ public class Program
 {
     public static void Main()
     {
-        var api = "SXNME3YSQZTFJK7I";
+        
 
         using var db = new KnowledgeDb();
         
-        var avConnection = new AVConnection(api);
+        var avConnection = new AVConnection(AVConnection.Apikey);
             
-        db.Stocks.AddRange(avConnection.GetMonthlyStocksDates("IBM"));
+        //db.Stocks.AddRange(avConnection.GetMonthlyStocksDates("IBM"));
         db.SaveChanges(); 
     }
+    
 }

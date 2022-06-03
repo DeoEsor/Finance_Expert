@@ -1,4 +1,26 @@
 ﻿syntax = "proto3";
 
-package UserService;
-option csharp_namespace = "UserService";
+package ExpertService;
+option csharp_namespace = "ExpertService.Messages";
+
+
+message Portfolios {
+  repeated Portfolio Portfolios = 1;
+}
+
+message Portfolio{
+  int32 owner_id = 1;
+  float risk = 2;
+  float beta = 3;
+  float possible_income = 4;
+  repeated OwningStock stocks = 5;
+}
+
+message OwningStock{
+  Stock stock = 1;
+  float part = 2;
+}
+
+message Stock{
+  string symbol = 1;
+}

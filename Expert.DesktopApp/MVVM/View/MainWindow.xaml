@@ -1,11 +1,11 @@
 ﻿<Window
     AllowsTransparency="True"
-    Height="450"
-    MinHeight="450"
-    MinWidth="600"
+    Height="600"
+    MinHeight="500"
+    MinWidth="1200"
     ResizeMode="CanResizeWithGrip"
     Background="Transparent"
-    Width="800"
+    Width="900"
     WindowStyle="None"
     mc:Ignorable="d"
     x:Class="Expert.DesktopApp.MainWindow"
@@ -16,9 +16,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:userControls="clr-namespace:Expert.DesktopApp.UserControls">
-    <!--<Window.DataContext>
-        <vm:ChatViewModel />
-    </Window.DataContext> -->
     <Window.Resources>
         <BitmapImage x:Key="DefaultImage" UriSource="/resources/Icons/default_logo.png" />
         <Image x:Key="SendButtonImage" Source="../../Resources/Icons/send.png"  Width="20" Height="20"
@@ -53,23 +50,64 @@
                                             Foreground="White"/>
             </StackPanel>
             
-            <StackPanel Margin="0,20,20,0" Grid.Row="1" Grid.Column="0">
-                <RadioButton Content="Главная"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
-                <RadioButton Content="Новости"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
-                <RadioButton Content="Составить портфель"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
-            </StackPanel>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <StackPanel Margin="0,20,20,0">
+                    <RadioButton Content="Главная"
+                                 Height="50"
+                                 Foreground="White"
+                                 FontSize="14"
+                                 IsChecked="True"
+                                 Command="{Binding MainViewCommand}"
+                                 Style="{StaticResource MenuButtonTheme}"/>
+                    <RadioButton Content="Новости"
+                                 Height="50"
+                                 Foreground="White"
+                                 FontSize="14"
+                                 Command="{Binding DiscoveryCommand}"
+                                 Style="{StaticResource MenuButtonTheme}"/>
+                    <RadioButton Content="Составить портфель"
+                                 Height="50"
+                                 Foreground="White"
+                                 FontSize="14"
+                                 Command="{Binding CreatePortfolioCommand}"
+                                 Style="{StaticResource MenuButtonTheme}"/>
+                    <RadioButton Content="Добавить портфель"
+                                 Height="50"
+                                 Foreground="White"
+                                 FontSize="14"
+                                 Visibility="{Binding IsExpert}"
+                                 Command="{Binding AddPortfolioCommand}"
+                                 Style="{StaticResource MenuButtonTheme}"/>
+                    </StackPanel>
+                <StackPanel
+                             Orientation="Horizontal"
+                             VerticalAlignment="Bottom"
+                             Margin="20">
+                    <iconPacks:PackIconMaterial 
+                        Kind="Finance" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center" 
+                        Foreground="White"
+                        Height="25"
+                        Width="25"
+                    />
+                    <StackPanel VerticalAlignment="Center">
+                        <Label
+                            Content="{Binding User.Username,
+                         UpdateSourceTrigger=PropertyChanged}"
+                            FontWeight="SemiBold"
+                            Foreground="White"
+                            Margin="0,-5,0,-5" />
+                        <Label
+                            Content="{Binding User.Status,
+                         UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="10"
+                            FontWeight="SemiBold"
+                            Foreground="Gray"
+                            Margin="0,-8,0,-5" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
             
             <TextBox
                 Grid.Row="0" Grid.Column="1"
@@ -82,9 +120,8 @@
                 />
             
             <ContentControl Grid.Row="1" Grid.Column="1"
-                            Margin="10"
-                            VerticalAlignment="Center">
-                <userControls:PortfolioControl />
+                            VerticalAlignment="Top"
+                            Content="{Binding Content}">
             </ContentControl>
         </Grid>
     </Border>

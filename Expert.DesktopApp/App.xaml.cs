@@ -27,14 +27,15 @@ namespace Expert.DesktopApp
             // Grpc client
             Container.Register<ExpertClient>(Reuse.Singleton);
             Container.Register<UserAuthorizationService>(Reuse.Singleton);
-            //Views
-            Container.Register<Registration>(Reuse.Transient);
-            Container.Register<MainWindow>(Reuse.Transient);
             //ViewModels
             //Container.Register<ChatViewModel>(Reuse.Singleton);
+            Container.Register<MainViewModel>(Reuse.Singleton);
+            //Views
+            Container.Register<Registration>(Reuse.Singleton);
+            Container.Register<MainWindow>(Reuse.Singleton);
 			
-            var reg = Container.Resolve<MainWindow>();
-            //reg.DataContext = new RegistrationViewModel(reg);
+            var reg = Container.Resolve<Registration>();
+            reg.DataContext = new RegistrationViewModel(reg);
             reg.Show();
         }
 

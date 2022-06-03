@@ -4,12 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AlphaVantageAPI;
 
-[Table("Stocks")]
 public class StockData
 {
-    [Key]
-    public int Id { get; set; }
-        
     public DateTime Date { get; set; }
     
     [MaxLength(4)]

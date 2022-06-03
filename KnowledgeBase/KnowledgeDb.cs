@@ -6,12 +6,10 @@ using Microsoft.EntityFrameworkCore;
 /*
 
  */
-public sealed class KnowledgeDb : DbContext, IKnowledgeHolder<StockData>
+public sealed class KnowledgeDb : DbContext, IKnowledgeHolder<Portfolio>
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public DbSet<StockData> Stocks => Set<StockData>();
+    
+    public DbSet<Portfolio> Portfolios => Set<Portfolio>();
     
     
     public KnowledgeDb() => Database.EnsureCreated();
@@ -20,5 +18,5 @@ public sealed class KnowledgeDb : DbContext, IKnowledgeHolder<StockData>
         => optionsBuilder
             .UseSqlServer(@"Server=localhost,1433;Database=KnowledgeBase;Trusted_Connection=False;User ID=sa;Password=Pa55w0rd");
 
-    public IEnumerable<StockData> GetKnowledge() => Stocks;
+    IEnumerable<Portfolio> IKnowledgeHolder<Portfolio>.GetKnowledge() => Portfolios;
 }

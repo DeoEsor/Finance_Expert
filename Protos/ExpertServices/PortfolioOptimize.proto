@@ -1,0 +1,8 @@
+﻿syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+package ExpertService;
+option csharp_namespace = "ExpertService.Optimize";
+
+service OptimizePortfolio{
+}
